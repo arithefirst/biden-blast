@@ -13,15 +13,6 @@ var (
 	GscreenHeight int     = 600
 )
 
-type Player struct {
-	Image      *ebiten.Image
-	XPos, YPos float64
-}
-
-type Game struct {
-	player *Player
-}
-
 func NewGame() *Game {
 	image, _, err := ebitenutil.NewImageFromFile("sprites/player.png")
 	if err != nil {
