@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
@@ -15,14 +14,12 @@ func (g *Game) Update() error {
 	if (ebiten.IsKeyPressed(ebiten.KeyLeft) || ebiten.IsKeyPressed(ebiten.KeyA)) &&
 		g.player.XPos > 0 {
 		g.player.XPos -= 2 * moveSpeed
-		fmt.Printf("Player Pos: %v %v\n", g.player.XPos, g.player.YPos)
 	}
 
 	// Move Right
 	if (ebiten.IsKeyPressed(ebiten.KeyRight) || ebiten.IsKeyPressed(ebiten.KeyD)) &&
 		g.player.XPos < float64(GscreenWidth-playerWidth) {
 		g.player.XPos += 2 * moveSpeed
-		fmt.Printf("Player Pos: %v %v\n", g.player.XPos, g.player.YPos)
 	}
 
 	// Toggle debug with backtick
