@@ -20,6 +20,12 @@ func NewGame() *Game {
 	}
 
 	return &Game{
+
+		GameState: GameState{
+			GameEnd: false,
+			GameWon: false,
+		},
+
 		player: &Player{
 			Image: image,
 			XPos:  float64((GscreenWidth - image.Bounds().Dx()) / 2),

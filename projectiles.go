@@ -54,6 +54,7 @@ func (g *Game) updateProjs(proj *Proj) {
 
 				// Remove enemy
 				g.Enemies[i].Show = false
+				g.DeadEnemies += 1
 				g.Score += 100
 			}
 		}

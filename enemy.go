@@ -13,6 +13,13 @@ func (g *Game) updateEnemy(enemy *Enemy) {
 		enemy.X = 0
 		enemy.Y += 20
 	}
+
+	// If the enemy touches the player, end the game
+	if enemy.Show && enemy.Y+64 >= g.player.YPos &&
+		enemy.X+64 >= g.player.XPos {
+		g.GameState.GameEnd = true
+		g.GameState.GameWon = false
+	}
 }
 
 // drawEnemy draws a single enemy
