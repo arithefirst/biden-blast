@@ -18,6 +18,7 @@ type Enemy struct {
 type Proj struct {
 	X, Y   float64
 	Delete bool
+	Show   bool
 }
 
 // Game Stores all required game data

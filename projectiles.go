@@ -7,23 +7,27 @@ import (
 
 func (g *Game) bidenBlast(player *Player) {
 	g.Projs = append(g.Projs, Proj{
-		X: player.XPos + float64(player.Image.Bounds().Dx()/2),
-		Y: player.YPos,
+		X:      player.XPos + float64(player.Image.Bounds().Dx()/2) + 5,
+		Show:   true,
+		Delete: false,
+		Y:      player.YPos,
 	})
 }
 
 // drawProj draws a single projectile
 func (g *Game) drawProj(screen *ebiten.Image, proj *Proj) {
-	geoM := &ebiten.GeoM{}
-	geoM.Translate(proj.X, proj.Y)
+	if proj.Show {
+		geoM := &ebiten.GeoM{}
+		geoM.Translate(proj.X, proj.Y)
 
-	playerImg := ebiten.NewImage(10, 20)
-	playerImg.Fill(color.RGBA{
-		R: 255, G: 255,
-		B: 255, A: 255,
-	})
+		playerImg := ebiten.NewImage(10, 20)
+		playerImg.Fill(color.RGBA{
+			R: 255, G: 255,
+			B: 255, A: 255,
+		})
 
-	screen.DrawImage(playerImg, &ebiten.DrawImageOptions{GeoM: *geoM})
+		screen.DrawImage(playerImg, &ebiten.DrawImageOptions{GeoM: *geoM})
+	}
 }
 
 // updateProj updates all projectile positions
@@ -32,10 +36,13 @@ func (g *Game) updateProjs(proj *Proj) {
 		proj.Delete = true
 	} else {
 		for i := range g.Enemies {
-			if proj.X >= g.Enemies[i].X && proj.X <= g.Enemies[i].X+64 &&
-				proj.Y >= g.Enemies[i].Y && proj.Y <= g.Enemies[i].Y+64 &&
-				g.Enemies[i].Show {
+			if proj.X+10 >= g.Enemies[i].X && proj.X <= g.Enemies[i].X+64 &&
+				proj.Y+20 >= g.Enemies[i].Y && proj.Y <= g.Enemies[i].Y+64 &&
+				g.Enemies[i].Show && proj.Show {
+
 				proj.Delete = true
+				proj.Show = false
+				
 				g.Enemies[i].Show = false
 				g.Score += 100
 			}
