@@ -24,6 +24,7 @@ func (g *Game) Update() error {
 		fmt.Printf("Player Pos: %v %v\n", g.player.XPos, g.player.YPos)
 	}
 
+	// Update the enemies
 	for i := range g.Enemies {
 		g.updateEnemy(&g.Enemies[i])
 	}
