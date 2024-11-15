@@ -8,8 +8,8 @@ import (
 
 var (
 	moveSpeed     float64 = 2
-	GscreenWidth  int     = 800
-	GscreenHeight int     = 600
+	GscreenWidth          = 800
+	GscreenHeight         = 600
 )
 
 func NewGame() *Game {
@@ -24,13 +24,33 @@ func NewGame() *Game {
 			XPos:  0,
 			YPos:  0,
 		},
+
+		Enemies: []Enemy{
+			{X: 0, Y: 10},
+			{X: 74, Y: 10},
+			{X: 148, Y: 10},
+			{X: 222, Y: 10},
+			{X: 0, Y: 84},
+			{X: 74, Y: 84},
+			{X: 148, Y: 84},
+			{X: 222, Y: 84},
+			{X: 0, Y: 158},
+			{X: 74, Y: 158},
+			{X: 148, Y: 158},
+			{X: 222, Y: 158},
+		},
 	}
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	// Draw the enemies
+	for i := range g.Enemies {
+		g.drawEnemy(screen, g.Enemies[i])
+	}
+
+	// Draw the player
 	geoM := &ebiten.GeoM{}
 	geoM.Translate(g.player.XPos, g.player.YPos)
-
 	screen.DrawImage(g.player.Image, &ebiten.DrawImageOptions{
 		GeoM: *geoM,
 	})
