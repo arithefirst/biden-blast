@@ -21,8 +21,8 @@ func NewGame() *Game {
 	return &Game{
 		player: &Player{
 			Image: image,
-			XPos:  0,
-			YPos:  0,
+			XPos:  float64((GscreenWidth - image.Bounds().Dx()) / 2),
+			YPos:  float64(GscreenHeight - image.Bounds().Dy()),
 		},
 
 		Enemies: []Enemy{
