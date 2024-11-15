@@ -13,8 +13,16 @@ type Enemy struct {
 	X, Y float64
 }
 
+// Proj stores bullet pos
+type Proj struct {
+	X, Y   float64
+	Delete bool
+}
+
 // Game Stores all required game data
 type Game struct {
 	player  *Player
 	Enemies []Enemy
+	Projs   []Proj
+	TTS     int // Amount of frames until we let the player shoot again
 }

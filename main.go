@@ -48,6 +48,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.drawEnemy(screen, g.Enemies[i])
 	}
 
+	// Draw the projectiles
+	for i := range g.Projs {
+		g.drawProj(screen, g.Projs[i])
+	}
+
 	// Draw the player
 	geoM := &ebiten.GeoM{}
 	geoM.Translate(g.player.XPos, g.player.YPos)
