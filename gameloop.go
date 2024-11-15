@@ -21,13 +21,13 @@ func (g *Game) Update() error {
 		// Move Left
 		if (ebiten.IsKeyPressed(ebiten.KeyLeft) || ebiten.IsKeyPressed(ebiten.KeyA)) &&
 			g.player.XPos > 0 {
-			g.player.XPos -= 2 * moveSpeed
+			g.player.XPos -= 2 * 2
 		}
 
 		// Move Right
 		if (ebiten.IsKeyPressed(ebiten.KeyRight) || ebiten.IsKeyPressed(ebiten.KeyD)) &&
 			g.player.XPos < float64(GscreenWidth-playerWidth) {
-			g.player.XPos += 2 * moveSpeed
+			g.player.XPos += 2 * 2
 		}
 
 		// Toggle debug with backtick

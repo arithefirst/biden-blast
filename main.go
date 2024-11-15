@@ -8,9 +8,8 @@ import (
 )
 
 var (
-	moveSpeed     float64 = 2
-	GscreenWidth          = 800
-	GscreenHeight         = 600
+	GscreenWidth  = 800
+	GscreenHeight = 600
 )
 
 func NewGame() *Game {
@@ -50,30 +49,33 @@ func NewGame() *Game {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Score: %d", g.Score), 0, 0)
-	// Draw debug data
-	if g.ShowDebug {
-		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("FPS: %0.2f", ebiten.ActualFPS()), 0, 12)
-		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Projs: %d", len(g.Projs)), 0, 24)
+	if g.GameState.GameWon {
+
+	} else {
+		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Score: %d", g.Score), 0, 0)
+		// Draw debug data
+		if g.ShowDebug {
+			ebitenutil.DebugPrintAt(screen, fmt.Sprintf("FPS: %0.2f", ebiten.ActualFPS()), 0, 12)
+			ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Projs: %d", len(g.Projs)), 0, 24)
+		}
+
+		// Draw the enemies
+		for i := range g.Enemies {
+			g.drawEnemy(screen, &g.Enemies[i])
+		}
+
+		// Draw the projectiles
+		for i := range g.Projs {
+			g.drawProj(screen, &g.Projs[i])
+		}
+
+		// Draw the player
+		geoM := &ebiten.GeoM{}
+		geoM.Translate(g.player.XPos, g.player.YPos)
+		screen.DrawImage(g.player.Image, &ebiten.DrawImageOptions{
+			GeoM: *geoM,
+		})
 	}
-
-	// Draw the enemies
-	for i := range g.Enemies {
-		g.drawEnemy(screen, &g.Enemies[i])
-	}
-
-	// Draw the projectiles
-	for i := range g.Projs {
-		g.drawProj(screen, &g.Projs[i])
-	}
-
-	// Draw the player
-	geoM := &ebiten.GeoM{}
-	geoM.Translate(g.player.XPos, g.player.YPos)
-	screen.DrawImage(g.player.Image, &ebiten.DrawImageOptions{
-		GeoM: *geoM,
-	})
-
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
@@ -82,6 +84,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func main() {
 	ebiten.SetWindowTitle("Space invaders")
+	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 	err := ebiten.RunGame(NewGame())
 	if err != nil {
 		log.Fatal(err)

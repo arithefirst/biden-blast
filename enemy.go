@@ -8,10 +8,10 @@ import (
 // updateEnemy updates an enemies position
 func (g *Game) updateEnemy(enemy *Enemy) {
 	enemy.X += 4
-	if enemy.X > 800 {
+	if enemy.X >= float64(GscreenWidth) {
 		// when the enemy hits the edge, have it come slightly closer
 		enemy.X = 0
-		enemy.Y += 20
+		enemy.Y += 40
 	}
 
 	// If the enemy touches the player, end the game
