@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 // Update runs every tick/frame
@@ -24,6 +25,11 @@ func (g *Game) Update() error {
 		fmt.Printf("Player Pos: %v %v\n", g.player.XPos, g.player.YPos)
 	}
 
+	// Toggle debug with backtick
+	if inpututil.IsKeyJustPressed(ebiten.KeyBackquote) {
+		g.ShowDebug = !g.ShowDebug
+	}
+
 	// Update the enemies
 	for i := range g.Enemies {
 		g.updateEnemy(&g.Enemies[i])
@@ -39,10 +45,10 @@ func (g *Game) Update() error {
 		g.Projs = g.Projs[:len(g.Projs)-1]
 	}
 
-	// If you are able to shoot a projectile, do so whenn space is pressed
+	// If you are able to shoot a projectile, do so when space is pressed
 	if ebiten.IsKeyPressed(ebiten.KeySpace) && g.TTS == 0 {
 		g.bidenBlast(g.player)
-		g.TTS = 50
+		g.TTS = 30
 	} else if g.TTS > 0 {
 		g.TTS -= 1
 	}

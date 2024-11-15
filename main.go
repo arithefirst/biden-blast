@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"log"
@@ -43,6 +44,13 @@ func NewGame() *Game {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Score: %d", g.Score), 0, 0)
+	// Draw debug data
+	if g.ShowDebug {
+		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("FPS: %0.2f", ebiten.ActualFPS()), 0, 12)
+		ebitenutil.DebugPrintAt(screen, fmt.Sprintf("Projs: %d", len(g.Projs)), 0, 24)
+	}
+
 	// Draw the enemies
 	for i := range g.Enemies {
 		g.drawEnemy(screen, &g.Enemies[i])

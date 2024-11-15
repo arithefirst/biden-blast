@@ -25,6 +25,7 @@ type Proj struct {
 type Game struct {
 	player        *Player
 	Enemies       []Enemy
+	ShowDebug     bool
 	EnemiesToKill []int
 	Projs         []Proj
 	Score         uint
