@@ -16,12 +16,14 @@ func (g *Game) updateEnemy(enemy *Enemy) {
 }
 
 // drawEnemy draws a single enemy
-func (g *Game) drawEnemy(screen *ebiten.Image, enemy Enemy) {
-	geoM := &ebiten.GeoM{}
-	geoM.Translate(enemy.X, enemy.Y)
+func (g *Game) drawEnemy(screen *ebiten.Image, enemy *Enemy) {
+	if enemy.Show {
+		geoM := &ebiten.GeoM{}
+		geoM.Translate(enemy.X, enemy.Y)
 
-	enemyImg := ebiten.NewImage(64, 64)
-	enemyImg.Fill(color.RGBA{R: 255})
+		enemyImg := ebiten.NewImage(64, 64)
+		enemyImg.Fill(color.RGBA{R: 255})
 
-	screen.DrawImage(enemyImg, &ebiten.DrawImageOptions{GeoM: *geoM})
+		screen.DrawImage(enemyImg, &ebiten.DrawImageOptions{GeoM: *geoM})
+	}
 }

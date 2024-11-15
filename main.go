@@ -26,18 +26,18 @@ func NewGame() *Game {
 		},
 
 		Enemies: []Enemy{
-			{X: 0, Y: 10},
-			{X: 74, Y: 10},
-			{X: 148, Y: 10},
-			{X: 222, Y: 10},
-			{X: 0, Y: 84},
-			{X: 74, Y: 84},
-			{X: 148, Y: 84},
-			{X: 222, Y: 84},
-			{X: 0, Y: 158},
-			{X: 74, Y: 158},
-			{X: 148, Y: 158},
-			{X: 222, Y: 158},
+			{X: 0, Y: 10, Show: true},
+			{X: 74, Y: 10, Show: true},
+			{X: 148, Y: 10, Show: true},
+			{X: 222, Y: 10, Show: true},
+			{X: 0, Y: 84, Show: true},
+			{X: 74, Y: 84, Show: true},
+			{X: 148, Y: 84, Show: true},
+			{X: 222, Y: 84, Show: true},
+			{X: 0, Y: 158, Show: true},
+			{X: 74, Y: 158, Show: true},
+			{X: 148, Y: 158, Show: true},
+			{X: 222, Y: 158, Show: true},
 		},
 	}
 }
@@ -45,12 +45,12 @@ func NewGame() *Game {
 func (g *Game) Draw(screen *ebiten.Image) {
 	// Draw the enemies
 	for i := range g.Enemies {
-		g.drawEnemy(screen, g.Enemies[i])
+		g.drawEnemy(screen, &g.Enemies[i])
 	}
 
 	// Draw the projectiles
 	for i := range g.Projs {
-		g.drawProj(screen, g.Projs[i])
+		g.drawProj(screen, &g.Projs[i])
 	}
 
 	// Draw the player
@@ -59,6 +59,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(g.player.Image, &ebiten.DrawImageOptions{
 		GeoM: *geoM,
 	})
+
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

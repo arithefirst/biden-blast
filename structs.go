@@ -11,6 +11,7 @@ type Player struct {
 // Enemy stores enemy pos
 type Enemy struct {
 	X, Y float64
+	Show bool
 }
 
 // Proj stores bullet pos
@@ -21,8 +22,10 @@ type Proj struct {
 
 // Game Stores all required game data
 type Game struct {
-	player  *Player
-	Enemies []Enemy
-	Projs   []Proj
-	TTS     int // Amount of frames until we let the player shoot again
+	player        *Player
+	Enemies       []Enemy
+	EnemiesToKill []int
+	Projs         []Proj
+	Score         uint
+	TTS           int // Amount of frames until we let the player shoot again
 }

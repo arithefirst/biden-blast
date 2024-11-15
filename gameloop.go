@@ -39,11 +39,10 @@ func (g *Game) Update() error {
 		g.Projs = g.Projs[:len(g.Projs)-1]
 	}
 
-	// If you are able to shoot a projectile, do so when
-	// space is pressed
+	// If you are able to shoot a projectile, do so whenn space is pressed
 	if ebiten.IsKeyPressed(ebiten.KeySpace) && g.TTS == 0 {
 		g.bidenBlast(g.player)
-		g.TTS = 20
+		g.TTS = 50
 	} else if g.TTS > 0 {
 		g.TTS -= 1
 	}
