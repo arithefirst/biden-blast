@@ -44,8 +44,8 @@ func (g *Game) updateProjs(proj *Proj) {
 	} else {
 		for i := range g.Enemies {
 			// Check if the projectile is colliding with an enemy
-			if proj.X+10 >= g.Enemies[i].X && proj.X <= g.Enemies[i].X+64 &&
-				proj.Y+20 >= g.Enemies[i].Y && proj.Y <= g.Enemies[i].Y+64 &&
+			if proj.X+5 >= g.Enemies[i].X && proj.X+5 <= g.Enemies[i].X+64 &&
+				proj.Y+10 >= g.Enemies[i].Y && proj.Y+10 <= g.Enemies[i].Y+64 &&
 				g.Enemies[i].Show && proj.Show {
 
 				// Remove projectile
