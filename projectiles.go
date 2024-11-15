@@ -7,6 +7,11 @@ import (
 
 // bidenBlast creates a new projectile at the player's pos
 func (g *Game) bidenBlast(player *Player) {
+	// Decrement the score by 25 for every bullet
+	if g.Score >= 25 {
+		g.Score -= 25
+	}
+
 	g.Projs = append(g.Projs, Proj{
 		X:      player.XPos + float64(player.Image.Bounds().Dx()/2) + 5,
 		Y:      player.YPos,
@@ -34,7 +39,7 @@ func (g *Game) drawProj(screen *ebiten.Image, proj *Proj) {
 // updateProj updates all projectile positions
 func (g *Game) updateProjs(proj *Proj) {
 	if proj.Y < -20 {
-		// Remove projectile when it goes offscreen
+		// Remove the projectile when it goes offscreen
 		proj.Delete = true
 	} else {
 		for i := range g.Enemies {
